@@ -46,14 +46,19 @@ html {
 body {
   background:
     radial-gradient(
-      circle at 15% 0%,
-      rgba(24, 95, 165, 0.35),
+      ellipse at 18% 0%,
+      rgba(24, 95, 165, 0.55),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 85% 95%,
+      rgba(55, 138, 221, 0.28),
       transparent 45%
     ),
     radial-gradient(
-      circle at 100% 100%,
-      rgba(55, 138, 221, 0.18),
-      transparent 40%
+      ellipse at 60% 50%,
+      rgba(4, 44, 83, 0.4),
+      transparent 55%
     ),
     var(--color-navy-900);
   color: var(--foreground);
@@ -137,6 +142,99 @@ h3 {
 }
 
 /* ───────────────────────────────────────────────────────────────
+   گلاس‌مورفیسم — کارت‌های شیشه‌ای با عمق
+   ─────────────────────────────────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(255, 255, 255, 0.018) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-color: rgba(55, 138, 221, 0.28);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   متن گرادیانت برند
+   ─────────────────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-frost) 0%,
+    var(--color-sky) 55%,
+    var(--color-accent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   بج اعتماد — pill کوچک با رنگ برند
+   ─────────────────────────────────────────────────────────────── */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(55, 138, 221, 0.1);
+  border: 1px solid rgba(55, 138, 221, 0.22);
+  font-size: 0.74rem;
+  color: var(--color-sky);
+  letter-spacing: 0.01em;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   عدد آمار (هیرو)
+   ─────────────────────────────────────────────────────────────── */
+.stat-num {
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(
+    135deg,
+    var(--color-frost) 0%,
+    var(--color-accent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   بج شماره مرحله
+   ─────────────────────────────────────────────────────────────── */
+.step-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: var(--color-frost);
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(24, 95, 165, 0.45);
+  flex-shrink: 0;
+}
+
+/* ───────────────────────────────────────────────────────────────
    حرکت: توالیِ ورودِ ارکستره‌شده (فقط هیرو) + پالس یک‌بارهٔ احتیاط
    ─────────────────────────────────────────────────────────────── */
 @keyframes rise-in {
@@ -149,6 +247,18 @@ h3 {
     transform: translateY(0);
   }
 }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes caution-pulse {
   0%,
   60%,
@@ -164,6 +274,12 @@ h3 {
   opacity: 0;
   animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 /* تأخیرهای پلکانی برای ردیف‌های کارت دارو */
 .stagger-1 { animation-delay: 0.05s; }
 .stagger-2 { animation-delay: 0.15s; }
@@ -178,12 +294,14 @@ h3 {
 /* لیفت ملایم هاور برای کارت‌ها */
 .lift {
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
 }
 .lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(2, 26, 51, 0.45);
 }
 
 /* احترام به prefers-reduced-motion — خاموش‌کردن همه‌ی حرکت‌ها */
@@ -192,11 +310,106 @@ h3 {
     scroll-behavior: auto;
   }
   .animate-rise,
+  .animate-fade-up,
   .pulse-once,
-  .lift {
+  .lift,
+  .animate-float,
+  .btn-glow {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   کارت شیشه‌ای پریمیوم — با بوردر درخشان
+   ─────────────────────────────────────────────────────────────── */
+.glass-card-premium {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(24, 95, 165, 0.04) 100%
+  );
+  border: 1px solid rgba(55, 138, 221, 0.2);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 32px rgba(2, 26, 51, 0.3);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    transform 0.22s ease;
+}
+.glass-card-premium:hover {
+  border-color: rgba(55, 138, 221, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 32px rgba(55, 138, 221, 0.13),
+    0 16px 48px rgba(2, 26, 51, 0.45);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(55, 138, 221, 0.05) 100%
+  );
+  transform: translateY(-4px);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   شناور — برای المان‌های قهرمان (هیرو)
+   ─────────────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   درخشش دکمه CTA
+   ─────────────────────────────────────────────────────────────── */
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(24, 95, 165, 0.5); }
+  50%       { box-shadow: 0 4px 36px rgba(55, 138, 221, 0.7), 0 0 48px rgba(55, 138, 221, 0.18); }
+}
+.btn-glow {
+  animation: btn-glow 3s ease-in-out infinite;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   پس‌زمینه شبکه ظریف
+   ─────────────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(55, 138, 221, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(55, 138, 221, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   جداکننده درخشان بین بخش‌ها
+   ─────────────────────────────────────────────────────────────── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(55, 138, 221, 0.25) 25%,
+    rgba(55, 138, 221, 0.5) 50%,
+    rgba(55, 138, 221, 0.25) 75%,
+    transparent 100%
+  );
+}
+
+/* ───────────────────────────────────────────────────────────────
+   آیکون با درخشش گرادیانت
+   ─────────────────────────────────────────────────────────────── */
+.icon-glow {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  box-shadow:
+    0 4px 16px rgba(24, 95, 165, 0.45),
+    0 0 0 1px rgba(55, 138, 221, 0.25);
 }

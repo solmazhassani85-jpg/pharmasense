@@ -5,6 +5,7 @@ import MedicationCard from "@/components/MedicationCard";
 import RevealSection from "@/components/RevealSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FaqSection from "@/components/FaqSection";
+import PhotoGallery from "@/components/PhotoGallery";
 
 export default function HomePage() {
   return (
@@ -81,6 +82,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── گالری عکس ──────────────────────────────────────── */}
+      <PhotoGallery />
 
       {/* ── پیام‌های کلیدی ──────────────────────────────────── */}
       <RevealSection>

@@ -11,7 +11,7 @@ const photos = [
     caption: "مشاوره دارویی اختصاصی",
   },
   {
-    src: "/images/consultation-2.jpg",
+    src: "/images/consultation-2.avif",
     alt: "متخصص دارویی در حال کمک به بیمار با قرص‌ها",
     caption: "بررسی و دوزبندی دارو",
   },

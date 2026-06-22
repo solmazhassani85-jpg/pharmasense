@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DemoBanner from "@/components/DemoBanner";
+import FloatingBookButton from "@/components/FloatingBookButton";
 
 // فونت اصلی فارسی برای کل سایت (متن بدنه و تیترها)
 const vazir = Vazirmatn({
@@ -67,6 +68,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingBookButton />
       </body>
     </html>
   );

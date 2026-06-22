@@ -1,64 +1,80 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import RevealSection from "./RevealSection";
 
 const photos = [
   {
-    id: "7659873",
-    alt: "داروساز بالینی در حال مشاوره با بیمار",
+    src: "/images/consultation-1.jpg",
+    alt: "داروساز بالینی در حال دادن دارو به بیمار",
     caption: "مشاوره دارویی اختصاصی",
   },
   {
-    id: "5452293",
-    alt: "متخصص دارویی در حال بررسی داروها",
-    caption: "بررسی تداخلات دارویی",
+    src: "/images/consultation-2.jpg",
+    alt: "متخصص دارویی در حال کمک به بیمار با قرص‌ها",
+    caption: "بررسی و دوزبندی دارو",
   },
   {
-    id: "8460157",
-    alt: "داروساز و بیمار در حال گفتگو",
+    src: "/images/consultation-3.jpg",
+    alt: "داروساز در حال نشان دادن داروها",
     caption: "گزارش شخصی‌سازی‌شده",
   },
 ];
 
-function PhotoCard({ photo, delay }: { photo: (typeof photos)[0]; delay: number }) {
+function PhotoCard({
+  photo,
+  delay,
+}: {
+  photo: (typeof photos)[0];
+  delay: number;
+}) {
   const [errored, setErrored] = useState(false);
-  const src = `https://images.pexels.com/photos/${photo.id}/pexels-photo-${photo.id}.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1`;
 
   return (
     <RevealSection delay={delay}>
       <div className="glass-card-premium group cursor-default overflow-hidden rounded-2xl">
-        {errored ? (
-          /* جای‌گذار در صورت خطا */
-          <div className="flex aspect-[4/3] flex-col items-center justify-center gap-3 bg-primary/10">
-            <svg
-              viewBox="0 0 24 24"
-              className="h-10 w-10 text-pale/20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              aria-hidden="true"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="2" />
-              <circle cx="8.5" cy="8.5" r="1.5" />
-              <path d="m21 15-5-5L5 21" />
-            </svg>
-            <p className="text-xs text-pale/30">{photo.alt}</p>
-          </div>
-        ) : (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={src}
-            alt={photo.alt}
-            className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            onError={() => setErrored(true)}
-            loading="lazy"
-          />
-        )}
+        <div className="relative aspect-[4/3] overflow-hidden bg-primary/10">
+          {errored ? (
+            /* جای‌گذار در صورت نبودن فایل */
+            <div className="flex h-full flex-col items-center justify-center gap-3">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-10 w-10 text-pale/20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                aria-hidden="true"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="m21 15-5-5L5 21" />
+              </svg>
+              <p className="text-xs text-pale/30">عکس هنوز بارگذاری نشده</p>
+            </div>
+          ) : (
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={() => setErrored(true)}
+            />
+          )}
+
+          {/* اُورلی گرادیانت پایین */}
+          {!errored && (
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-900/70 to-transparent" />
+          )}
+        </div>
 
         {/* کپشن */}
         <div className="flex items-center gap-2.5 border-t border-white/[0.07] px-5 py-3.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent/60" aria-hidden="true" />
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-accent/60"
+            aria-hidden="true"
+          />
           <p className="text-sm text-pale/75">{photo.caption}</p>
         </div>
       </div>
@@ -80,20 +96,12 @@ export default function PhotoGallery() {
               هر جلسه، یک بررسی کامل و شخصی از داروهای شما.
             </p>
           </div>
-          <a
-            href="https://www.pexels.com/license/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-pale/30 transition-colors hover:text-pale/50"
-          >
-            عکس‌ها: Pexels
-          </a>
         </div>
       </RevealSection>
 
       <div className="grid gap-5 sm:grid-cols-3">
         {photos.map((p, i) => (
-          <PhotoCard key={p.id} photo={p} delay={i * 130} />
+          <PhotoCard key={p.src} photo={p} delay={i * 130} />
         ))}
       </div>
     </section>

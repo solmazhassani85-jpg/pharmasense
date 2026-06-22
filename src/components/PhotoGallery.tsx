@@ -15,11 +15,6 @@ const photos = [
     alt: "متخصص دارویی در حال کمک به بیمار با قرص‌ها",
     caption: "بررسی و دوزبندی دارو",
   },
-  {
-    src: "/images/consultation-3.jpg",
-    alt: "داروساز در حال نشان دادن داروها",
-    caption: "گزارش شخصی‌سازی‌شده",
-  },
 ];
 
 function PhotoCard({
@@ -99,7 +94,7 @@ export default function PhotoGallery() {
         </div>
       </RevealSection>
 
-      <div className="grid gap-5 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2">
         {photos.map((p, i) => (
           <PhotoCard key={p.src} photo={p} delay={i * 130} />
         ))}

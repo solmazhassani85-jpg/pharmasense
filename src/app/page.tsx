@@ -60,7 +60,7 @@ export default function HomePage() {
 
             <div className="animate-rise stagger-4 mt-10 grid grid-cols-3 gap-3 border-t border-white/[0.07] pt-8">
               {[
-                { num: "۴۵", label: "دقیقه جلسه اختصاصی" },
+                { num: "۲۰", label: "دقیقه جلسه اختصاصی" },
                 { num: "۱۰۰٪", label: "تحلیل شخصی‌سازی‌شده" },
                 { num: "۲", label: "درگاه پرداخت" },
               ].map((s) => (

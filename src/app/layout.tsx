@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fa_IR",
   },
+  verification: {
+    google: "Atgf_Oar94XVkJeyVAI2waOgf9CDZIETy3cUHj86qsk",
+  },
 };
 
 export default function RootLayout({
